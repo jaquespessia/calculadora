@@ -1,3 +1,4 @@
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,16 +9,110 @@
 </head>
 <body>
     <div class="container">
-    <h1>Calculadora-IMC</h1>
-    <link rel="stylesheet" href="css/calculadora.css">
-    <form action="">
-        <label for=" ">Peso </label>
-        <input type="text">
-        <label for="">Altura</label>
-        <input type="text">
-        <button> Enviar</button>
-    
-  </form>
-</div>  
+        <h1>Calculadora - IMC</h1>
+        <form action="" id="formulario">
+            <label for="peso">Peso</label>
+            <input type="text" id="peso">
+            
+            <label for="altura">Altura</label>
+            <input type="text" id="altura">
+            
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script src="js/calculadora.js"></script>
 </body>
-</html>                 
+</html>
+
+CSS
+*{
+    margin: 3%;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color:rgb(255, 0, 153);
+    padding: 0%;
+    font-size: 1.3em;
+    line-height: 1.5em;
+}
+.container{
+    max-width: 640px;
+    background-color: rgb(254, 104, 164);
+    margin: 5px auto;
+    border-radius: 17px;
+    height: 350px;
+    padding: 10px;
+}
+h1{
+    text-align: center;
+    color:rgb(2255, 175, 216);
+}
+form input, form label, form button{
+    display: block;
+    width: 90%;
+    margin-bottom: 10px;
+    color: rgb(255, 175, 216);
+    border-radius: 5px;
+
+}
+form input{
+    font-size: 23px;
+    height: 40px;
+    padding: 0 20px;
+}
+form button{
+    border: none;
+    background-color: rgb(255, 0, 153);
+    font-size: 23px;
+    height: 37px;
+}
+
+JS
+const formulario = document.querySelector("#formulario");  
+console.log(formulario);
+
+formulario.addEventListener('submit', function(e) {
+    e.preventDefault; 
+   
+    const inputPeso = e.target.querySelector("#peso"); 
+    const peso = Number(inputPeso.value);
+
+    alert("O peso digitado foi: " + peso);
+
+    const inputAltura = e.target.querySelector("#altura"); 
+    const altura = Number(inputAltura.value);
+
+    alert("A altura digitada foi: " + altura);
+
+    const imc = calcularIMC(peso, altura);
+    alert(imc);
+
+    const imc = calcularIMC(peso, Altura);
+    const classificacao = tabelaIMC(imc);
+
+    alert(classificacao);
+    
+});
+
+function calcularIMC(peso, Altura){
+    let imc = (peso / Altura ** 2);
+    return imc.toFixed(2);
+}
+
+//essa função é para classificar o grau de imc
+function tabelaIMC(imc){
+    const classificacao = ['abaixo do peso' , 'peso normal' , 'sobrepeso' , 'obesidade grau I' , 'obesidade grau II' , 
+    'obesidade grau III'
+]
+
+if(imc >= 39.9) return classificacao[5];
+if(imc >= 34.9) return classificacao[4];
+if(imc >= 29.9) return classificacao[3];
+if(imc >= 24.9) return classificacao[2];
+if(imc >= 18.5) return classificacao[1];
+if(imc <= 18.5) return classificacao[0];
+
+}
